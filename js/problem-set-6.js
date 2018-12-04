@@ -12,6 +12,10 @@
 
 function sayHello() {
 
+  let canvas = document.getElementById('canvas1')
+  let ctx = canvas1.getContext('2d');
+    ctx.font = '48px sans-serif';
+    ctx.strokeText('Hello, World!', 10, 50);
 }
 
 /*
@@ -39,6 +43,17 @@ function sayHello() {
 
 function drawRectangle() {
 
+let x;
+let y;
+let height;
+let width;
+
+do{
+  height = promt("Please enter the height for the Rectangle")
+} while (height < 1 ||height > 512)
+ 
+let canvas = document.getElementById('canvas1')
+let ctx = canvas2.getContext('2d');
 }
 
 /*
