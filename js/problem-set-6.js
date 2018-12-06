@@ -43,17 +43,35 @@ function sayHello() {
 
 function drawRectangle() {
 
+  let canvas = document.getElementById('canvas2')
+  let ctx = canvas.getContext('2d');
+
 let x;
 let y;
 let height;
 let width;
 
 do{
-  height = promt("Please enter the height for the Rectangle")
+  height = prompt("Please enter the height for the Rectangle")
 } while (height < 1 ||height > 512)
- 
-let canvas = document.getElementById('canvas1')
-let ctx = canvas2.getContext('2d');
+
+do{
+  width = prompt("Please enter the width for the Rectangle")
+} while (width < 1 ||width > 1024)
+
+do{
+  x = prompt("Please enter the x cordinate for the Rectangle")
+} while (x < 5)
+do{
+  y = prompt("Please enter the y cordinate for the Rectangle")
+} while (y < 5)
+
+x = Number(x);
+y = Number(y);
+height = Number(height);
+width = Number(width);
+
+ ctx.strokeRect(x, y, height, width);
 }
 
 /*
