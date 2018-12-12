@@ -101,6 +101,23 @@ width = Number(width);
 
 function drawColoredRectangle() {
 
+  canvas = document.getElementById("canvas3");
+  const context = canvas.getContext("2d");
+
+  let color;
+   while(1){
+     color = prompt("Please Enter a Valid Color")
+     if(color == "black" || color == "blue" || color == "green" || color == "orange" || color == "purple" || color == "red" || color == "yellow") {
+       break;
+     }
+     else {
+       alert(`${color} is not supported.`)
+     }
+   }
+
+  context.fillStyle=color;
+  context.clearRect(0, 0, canvas.width, canvas.height)
+  context.fillRect(10, 10, 100, 50)
 }
 
 /*
