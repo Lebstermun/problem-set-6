@@ -102,7 +102,7 @@ width = Number(width);
 function drawColoredRectangle() {
 
   canvas = document.getElementById("canvas3");
-  const context = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d");
 
   let color;
    while(1){
@@ -115,9 +115,9 @@ function drawColoredRectangle() {
      }
    }
 
-  context.fillStyle=color;
-  context.clearRect(0, 0, canvas.width, canvas.height)
-  context.fillRect(10, 10, 100, 50)
+  ctx.fillStyle=color;
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.fillRect(10, 10, 100, 50)
 }
 
 /*
@@ -150,7 +150,39 @@ function drawColoredRectangle() {
  */
 
 function drawTriangle() {
+  let canvas = document.getElementById('canvas4');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512)
 
+  let a = prompt("Enter the length of side 1");
+  let b = prompt("Enter the length of side 2");
+  let c = prompt("Enter the length of side 3");
+  a = Number(a)
+  b = Number(b)
+  c = Number(c)
+
+
+while((a*a) + (b*b) != (c*c) || a + 10 >= 512 || b + 10 >= 1024){
+  alert("Please enter valid measurements for the triangle")
+  a = prompt("Enter the length of side 1");
+  a = Number(a)
+  b = prompt("Enter the length of side 2");
+  b = Number(b)
+  c = prompt("Enter the length of side 3");
+  c = Number(c)
+}
+
+a = Number(a)
+b = Number(b)
+  a = a + 10
+  b = b + 10
+
+  ctx.beginPath();
+  ctx.moveTo(10, 10);
+  ctx.lineTo(10, a);
+  ctx.lineTo(b, a);
+  ctx.lineTo(10, 10)
+  ctx.stroke();
 }
 
 /*
@@ -173,7 +205,47 @@ function drawTriangle() {
  */
 
 function drawSmileyFace() {
+const canvas=document.getElementById("canvas5");
+  const ctx=canvas5.getContext("2d");
+  ctx.clearRect(0, 0, 1024, 512);
 
+  let face;
+  let x = 5;
+  let y = 5;
+
+  do {
+    face = prompt("Enter face's radius");
+    face = Number(face);
+  } while (face + x >= 1024 || face + y >= 512 || face < 1)
+
+  while(x - face < 5 || x + face > 1024) {
+    x+= 5
+  }
+  while(y - face < 5 || y + face > 512) {
+    y+= 5
+  }
+
+  let mouth = face*0.70
+  let eyes = face*0.10
+  let eye1X = x - (face/3.5)
+  let eye1Y = y - (face/3)
+  let eye2X = x + (face/2)
+  let eye2Y = y - (face/3)
+  let m = y + (face/9)
+
+
+  ctx.beginPath();
+  ctx.arc(x,y,face,0,2*Math.PI);
+
+  ctx.moveTo(eye1X, eye1Y);
+  ctx.arc(eye1X-eyes, eye1Y, eyes, 0, 2*Math.PI);
+
+  ctx.moveTo(eye2X, eye2Y);
+  ctx.arc(eye2X-eyes, eye2Y, eyes, 0, 2*Math.PI);
+
+  ctx.moveTo(x+mouth,m);
+  ctx.arc(x, m, mouth, 0, Math.PI);
+  ctx.stroke();
 }
 
 /*
@@ -195,7 +267,40 @@ function drawSmileyFace() {
  */
 
 function drawStar() {
+let canvas = document.getElementById('canvas6');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 256);
+  
+let outer = prompt("Enter the Outer Radius");
+let inner = prompt("Enter the Inner Radius");
+    
+outer = Number(outer);
+inner = Number(inner);
 
+if (isNaN(outer) == true || isNaN(inner) == true) {
+  alert("One of your inputs is not a number.");
+} else if (outer < 2) {
+  alert("Your outer radius is too small.");
+} else if (inner < 1) {
+  alert("Your inner radius is too small.");
+} else if (outer <= inner) {
+  alert("Your outer radius must be larger than your inner radius.")
+} else {
+  ctx.beginPath();
+  ctx.moveTo(125, 125 - outer);
+  
+  let x = 0;
+  let angle = 0 * Math.PI;
+    
+  while (x < 5) {
+    ctx.lineTo(Math.cos(1.3 * Math.PI - angle) * inner + 125, Math.sin(1.3 * Math.PI - angle) * inner + 125);
+    ctx.lineTo(Math.cos(1.1 * Math.PI - angle) * outer + 125, Math.sin(1.1 * Math.PI - angle) * outer + 125);
+    angle = angle + 0.4 * Math.PI;
+    x = x + 1;
+  }
+  ctx.closePath();
+  ctx.stroke();
+  lineWidth = 1;
 }
 
 /*
@@ -214,7 +319,26 @@ function drawStar() {
  */
 
 function drawStopSign() {
+let canvas = document.getElementById('canvas7');
+  let ctx = canvas7.getContext('2d');
 
+  ctx.beginPath();
+  ctx.moveTo(67, 10);
+  ctx.lineTo(147, 10);
+  ctx.lineTo(204, 67);
+  ctx.lineTo(204, 147);
+  ctx.lineTo(147, 204);
+  ctx.lineTo(67, 204);
+  ctx.lineTo(10, 147);
+  ctx.lineTo(10, 67);
+  ctx.lineTo(67, 10);
+  ctx.fillStyle="red";
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.font='65px sans-serif';
+  ctx.fillStyle="white";
+  ctx.fillText('STOP', 20, 130);
 }
 
 /*
@@ -236,7 +360,37 @@ function drawStopSign() {
  */
 
 function drawPyramid() {
+let canvas = document.getElementById('canvas8');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512)
 
+  let length
+  let x = 0
+  let y = 0 
+  let max = 5;
+  let xOver = 0;
+  let yUp = 0;
+  let init = 0;
+  
+    do{
+        length = prompt("Enter the side length of a box")
+        length = Number(length)
+    } while(length < 0 || length > 100 || NaN)
+ 
+ ctx.beginPath();
+    while (y < 5) {
+      while (x < max) {
+          ctx.strokeRect(10 + xOver + init, 512 - 10 - length - yUp, length, length);
+          xOver = xOver + length;
+          x++;
+      }
+      y++;
+      x = 0;
+      xOver = 0;
+      yUp = yUp + length;
+      max = max - 1;
+      init = init + (length / 2);
+   }    
 }
 
 /*
@@ -269,5 +423,64 @@ function drawPyramid() {
  */
 
 function drawHouse() {
+let canvas = document.getElementById('canvas9');
+  let ctx = canvas9.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 760);
 
+  let houseColor = prompt("Please enter a house color.")
+  while(houseColor != "brown" && houseColor !="blue" && houseColor !="green" && houseColor !="orange" && houseColor !="purple" && houseColor !="red" && houseColor !="yellow"){
+      houseColor = prompt(`${houseColor} is not a supported color`)
+    }
+
+  let doorColor = prompt("Please enter a front door color")
+  while(doorColor != "brown" && doorColor !="blue" && doorColor !="green" && doorColor !="orange" && doorColor !="purple" && doorColor !="red" && doorColor !="yellow" || doorColor == houseColor){
+      doorColor = prompt(`${doorColor} is not a supported color or is the same as the previous color`)
+    }
+
+  ctx.rect(150, 250, 724, 495)
+  ctx.fillStyle = houseColor
+  ctx.fillRect(150, 250, 724, 495);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(150, 250);
+  ctx.lineTo(512, 10);
+  ctx.lineTo(874, 250);
+  ctx.lineTo(150, 250);
+  ctx.fillStyle = "gray"
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.rect(462, 545, 100, 200);
+  ctx.fillStyle = doorColor
+  ctx.fillRect(462, 545, 100, 200);
+  ctx.stroke();
+
+  let window = "SkyBlue"
+
+  ctx.rect(250, 550, 100, 100)
+  ctx.fillStyle = window
+  ctx.fillRect(250, 550, 100, 100);
+  ctx.stroke();
+
+  ctx.rect(250, 350, 100, 100)
+  ctx.fillStyle = window
+  ctx.fillRect(250, 350, 100, 100);
+  ctx.stroke();
+
+  ctx.rect(674, 550, 100, 100)
+  ctx.fillStyle = window
+  ctx.fillRect(674, 550, 100, 100);
+  ctx.stroke();
+
+  ctx.rect(674, 350, 100, 100)
+  ctx.fillStyle = window
+  ctx.fillRect(674, 350, 100, 100);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(540, 650, 10, 0, 2*Math.PI)
+  ctx.fillStyle = "GoldenRod"
+  ctx.fill();
+  ctx.stroke();
 }
